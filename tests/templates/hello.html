@@ -1,0 +1,188 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block layout_style %}
+    <style type="text/css">
+        @page {
+            size: {{ pagesize|default:"A4" }};
+            margin-left: 5.5cm;
+            margin-right: 2.5cm;
+            margin-top: 2.5cm;
+            margin-bottom: 2cm;
+
+            @frame header {
+                -pdf-frame-content: page-header;
+                margin-top: 1.3cm;
+                margin-right: 2mm;
+                margin-bottom: 1cm;
+                margin-left: 1.2cm;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block extra_style %}
+    <style type="text/css">
+        @font-face { font-family: Lato; src: url(fonts/Lato-Bol.ttf); font-weight: bold; }
+        @font-face { font-family: Lato; src: url(fonts/Lato-Reg.ttf); }
+        @font-face { font-family: "Lato Light"; src: url(fonts/Lato-Lig.ttf); }
+
+        html {
+            font-family: "Lato", "Helvetica", "sans-serif";
+            color: #333333;
+        }
+
+        p {
+            margin: 0 0 6px 0;
+            font-size: 11pt;
+            font-family: "Lato", "Helvetica", "sans-serif";
+        }
+
+        table {
+            line-height: 140%;
+            margin-bottom: 20px;
+        }
+            table.bordered {
+                border-top: 0.1pt solid #999999;
+                border-bottom: 0.1pt solid #999999;
+            }
+
+            tr, td, th { border: none; }
+
+            th {
+                font-size: 10pt;
+                border-bottom: 0.1pt solid #999999;
+                padding: 3px 0;
+                line-height: 1;
+                font-weight: bold;
+            }
+
+            td {
+                font-size: 10pt;
+                font-family: "Lato", "Helvetica", "sans-serif";
+                vertical-align: top;
+                padding: 3px 0;
+            }
+
+            td:last-child { padding-bottom: 0; }
+
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .bottom-10 { margin-bottom: 10px; }
+        .bottom-20 { margin-bottom: 20px; }
+
+        .header { color: #7f7f7f; }
+        .header p { font-size: 13px; line-height: 1.5em; }
+        .header-link { font-weight: bold; text-decoration: none; color: #4F81BD; font-size: 14px; }
+        .logo { margin-bottom: 20px; margin-left: -25px; }
+        .logo img { zoom: 60%; }
+
+        .recipient { margin-left: 7cm; }
+
+        .main h1 {
+            margin: 18px 0 18px 0;
+            font-size: 250%;
+            font-weight: normal;
+            color: #4F81BD;
+        }
+
+        .main h2 {
+            margin: 18px 0 6px 0;
+            font-size: 180%;
+            font-weight: normal;
+        }
+
+        .info { border: 1px solid #4F81BD; padding: 10px; margin-top: 50px; margin-bottom: 50px; }
+        .info a { color: #4F81BD; text-decoration: none; }
+
+    </style>
+{% endblock %}
+
+{%block page_header%}
+    <div id="page-header">
+        <div class="header">
+            <p class="logo"><img src="img/logo.jpg" /></p>
+            <p>
+                Street Name <br>
+                Postal Code <br/>
+                City
+            </p>
+            <p class="header-link">
+                <a class="header-link" href="http://en.ig.ma/">en.ig.ma</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <div class="recipient bottom-10">
+            <p class="bottom-10">
+                <strong>ACME Inc.</strong>
+                <br> John Doe
+            </p>
+            <p class="bottom-10">
+                Street Name <br>
+                Postal Code <br/>
+                City
+            </p>
+            <p>{{ today|date:"DATETIME_FORMAT" }} UTC</p>
+        </div>
+
+
+        <p class="info">
+            This is an example of <a href="https://github.com/nigma/django-easy-pdf">django-easy-pdf</a>
+            &ndash; Django PDF rendering the easy way.
+            Check <a href="http://en.ig.ma/">en.ig.ma</a> for Django and Python development.
+        </p>
+
+        <div class="main">
+            <h1>Sample Invoice</h1>
+
+            <table class="bordered bottom-20">
+                <tr>
+                    <td class="item-name"><strong>Invoice number</strong></td>
+                    <td><strong>{{ today|date:"y/m/d/1" }}</strong></td>
+                </tr>
+                <tr>
+                    <td class="item-name">Amount</td>
+                    <td><strong>100 Doge</strong></td>
+                </tr>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">Description</th>
+                        <th class="text-right">Amount</th>
+                        <th class="text-right">Tax</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">Some stuff</td>
+                        <td class="text-right">100 Doge</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">100 Doge</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="bottom-20">
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td class="text-right"><strong>100 Doge</strong></td>
+                </tr>
+            </table>
+
+            <h2>Payment details</h2>
+
+            <p class="bottom-20">
+                Please cover the invoice within 10 days.
+            </p>
+
+            <p>Dogecoin address (it's real): <strong>DREWeqR5KB2rbpJFybKvWepNs6sUQZowNs</strong></p>
+            <pdf:barcode value="DREWeqR5KB2rbpJFybKvWepNs6sUQZowNs" type="qr" barwidth="100" barheight="100" />
+        </div>
+    </div>
+{% endblock %}
