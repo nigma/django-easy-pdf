@@ -1,0 +1,13 @@
+django>=1.5.1
+git+https://github.com/chrisglass/xhtml2pdf.git
+
+# Dependencies of xhtml2pdf
+html5lib>=0.999
+httplib2>=0.8
+Pillow>=2.2.0
+pyPdf2>=1.19
+reportlab>=2.7
+
+# This is not a project requirement
+# Only used for demo on http://easy-pdf.herokuapp.com
+waitress>=0.8.8
