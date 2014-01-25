@@ -35,8 +35,8 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        "django>=1.5.1",
-        "git+https://github.com/chrisglass/xhtml2pdf.git"
+        #"django>=1.5.1",
+        #"git+https://github.com/chrisglass/xhtml2pdf.git"
     ],
     zip_safe=False,
     keywords="django-easy-pdf",

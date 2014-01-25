@@ -30,7 +30,8 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf`` in your ``requirements.txt`` file.
+1. Include ``django-easy-pdf`` and ``git+https://github.com/chrisglass/xhtml2pdf.git``
+   in your ``requirements.txt`` file.
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
 
