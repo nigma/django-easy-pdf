@@ -57,8 +57,11 @@ Quickstart
 Documentation
 -------------
 
-The full documentation is at http://django-easy-pdf.rtfd.org.
+The full documentation is at `django-easy-pdf.rtfd.org <http://django-easy-pdf.rtfd.org>`_.
 
+A live demo is at `easy-pdf.herokuapp.com <https://easy-pdf.herokuapp.com/>`_.
+You can run it locally after installing dependencies by running ``python demo.py``
+script from the cloned repository.
 
 Dependencies
 ------------
