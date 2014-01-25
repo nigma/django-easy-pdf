@@ -2,11 +2,17 @@
 django-easy-pdf
 ===============
 
-.. image:: https://badge.fury.io/py/django-easy-pdf.png
-    :target: http://badge.fury.io/py/django-easy-pdf
+.. image:: https://pypip.in/v/django-easy-pdf/badge.png
+    :target: https://pypi.python.org/pypi/django-easy-pdf/
+    :alt: Latest Version
 
 .. image:: https://pypip.in/d/django-easy-pdf/badge.png
-    :target: https://crate.io/packages/django-easy-pdf?version=latest
+    :target: https://pypi.python.org/pypi/django-easy-pdf/
+    :alt: Downloads
+
+.. image:: https://pypip.in/license/django-easy-pdf/badge.png
+    :target: https://pypi.python.org/pypi/django-easy-pdf/
+    :alt: License
 
 Django PDF rendering, the easy way.
 
