@@ -10,4 +10,6 @@ Development Lead
 Contributors
 ------------
 
-None yet. Why not be the first?
+* Jon Bolt (@epicbagel)
+* @msaizar
+* @SaeX
