@@ -1,6 +1,7 @@
-===============
 django-easy-pdf
 ===============
+
+Django PDF rendering, the easy way.
 
 .. image:: https://pypip.in/v/django-easy-pdf/badge.png
     :target: https://pypi.python.org/pypi/django-easy-pdf/
@@ -13,8 +14,6 @@ django-easy-pdf
 .. image:: https://pypip.in/license/django-easy-pdf/badge.png
     :target: https://pypi.python.org/pypi/django-easy-pdf/
     :alt: License
-
-Django PDF rendering, the easy way.
 
 Developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
@@ -36,7 +35,7 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf`` and ``git+https://github.com/chrisglass/xhtml2pdf.git``
+1. Include ``django-easy-pdf``, ``xhtml2pdf>=0.0.5`` and ``reportlab>=2.7,<3``
    in your ``requirements.txt`` file.
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
@@ -76,7 +75,8 @@ Dependencies
 ``django-easy-pdf`` depends on:
 
     - ``django>=1.5.1``
-    - ``git+https://github.com/chrisglass/xhtml2pdf.git``
+    - ``xhtml2pdf==0.0.5``
+    - ``reportlab>=2.7,<3``
 
 
 License

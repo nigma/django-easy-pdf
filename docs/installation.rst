@@ -6,4 +6,4 @@ Add ``django-easy-pdf=<version>`` and ``git+https://github.com/chrisglass/xhtml2
 to your ``requirements.txt`` file or install it directly from the command line by invoking::
 
     $ pip install django-easy-pdf
-    $ pip install git+https://github.com/chrisglass/xhtml2pdf.git
+    $ pip install "xhtml2pdf>=0.0.5" "reportlab>=2.7,<3"

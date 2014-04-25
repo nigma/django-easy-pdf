@@ -12,7 +12,7 @@ except ImportError:
 version = "0.1.0"
 
 if sys.argv[-1] == "publish":
-    os.system("python setup.py sdist upload")
+    os.system("python setup.py sdist bdist_wheel upload")
     print("You probably want to also tag the version now:")
     print("  git tag -a %s -m 'version %s'" % (version, version))
     print("  git push --tags")
@@ -35,8 +35,9 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        #"django>=1.5.1",
-        #"git+https://github.com/chrisglass/xhtml2pdf.git"
+        "django>=1.5.1",
+        "xhtml2pdf>=0.0.5",
+        "reportlab>=2.1,<3"
     ],
     zip_safe=False,
     keywords="django-easy-pdf",
