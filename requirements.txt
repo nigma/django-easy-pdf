@@ -1,5 +1,5 @@
 django>=1.5.1
-xhtml2pdf==0.0.5
+xhtml2pdf>=0.0.6
 
 # Dependencies of xhtml2pdf
 html5lib>=0.999

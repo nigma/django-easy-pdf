@@ -35,7 +35,7 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf``, ``xhtml2pdf>=0.0.5`` and ``reportlab>=2.7,<3``
+1. Include ``django-easy-pdf``, ``xhtml2pdf>=0.0.6`` and ``reportlab>=2.7,<3``
    in your ``requirements.txt`` file.
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
@@ -75,7 +75,7 @@ Dependencies
 ``django-easy-pdf`` depends on:
 
     - ``django>=1.5.1``
-    - ``xhtml2pdf==0.0.5``
+    - ``xhtml2pdf>=0.0.6``
     - ``reportlab>=2.7,<3``
 
 
