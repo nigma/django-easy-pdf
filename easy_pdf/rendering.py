@@ -24,8 +24,6 @@ def fetch_resources(uri, rel):
     """
     Retrieves embeddable resource from given ``uri``.
 
-    For now only local resources (images, fonts) are supported.
-
     :param str uri: path or url to image or font resource
     :returns: path to local resource file.
     :rtype: str
