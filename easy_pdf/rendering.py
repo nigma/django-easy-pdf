@@ -31,7 +31,11 @@ def fetch_resources(uri, rel):
     :rtype: str
     :raises: :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
     """
-    if settings.STATIC_URL and uri.startswith(settings.STATIC_URL):
+    # For protocol relative, http and https URLs, we need to short circuit to skip 
+    # path checking at the end of function
+    if uri.startswith('//') or uri.startswith('http://') or uri.startswith('https://'):
+        return uri
+    elif settings.STATIC_URL and uri.startswith(settings.STATIC_URL):
         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ""))
     elif settings.MEDIA_URL and uri.startswith(settings.MEDIA_URL):
         path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
