@@ -5,6 +5,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import logging
 import os
 
+import django
 from django.conf import settings
 from django.template import loader, Context, RequestContext
 from django.http import HttpResponse
@@ -132,7 +133,7 @@ def render_to_pdf(template, context, encoding="utf-8", **kwargs):
 
     :raises: :exc:`~easy_pdf.exceptions.PDFRenderingError`, :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
     """
-    if not isinstance(context, Context):
+    if not isinstance(context, Context) and django.VERSION <= 1.9:
         context = Context(context)
 
     content = loader.render_to_string(template, context)
