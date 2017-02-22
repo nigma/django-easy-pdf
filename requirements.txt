@@ -1,13 +1,23 @@
-django>=1.5.1
-xhtml2pdf>=0.0.6
+django>=1.10
+WeasyPrint>=0.34
 
-# Dependencies of xhtml2pdf
-html5lib>=0.999
-httplib2>=0.8
-Pillow>=2.4.0
-pyPdf2>=1.21
-reportlab>=2.7,<3
+# Dependencies of WeasyPrint
+cairocffi>=0.8.0
+CairoSVG>=2.0.1
+cffi>=1.9.1
+cssselect>=1.0.1
+html5lib>=0.999999999
+lxml>=3.7.3
+olefile>=0.44
+Pillow>=4.0.0
+pip>=9.0.1
+pycparser>=2.17
+Pyphen>=0.9.4
+setuptools>=28.8.0
+six>=1.10.0
+tinycss>=0.4
+webencodings>=0.5
 
 # This is not a project requirement
-# Only used for demo on http://easy-pdf.herokuapp.com
-waitress>=0.8.8
+# Only used for demo at https://easy-pdf.herokuapp.com
+waitress>=1.0.0
