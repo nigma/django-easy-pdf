@@ -4,12 +4,11 @@
     <title>{{ title|default:"" }}</title>
 
     {% block style_base %}
-        {% comment %}
-            See DEFAULT_CSS in https://github.com/chrisglass/xhtml2pdf/blob/master/xhtml2pdf/default.py
-            for base style.
-        {% endcomment %}
-
         {% block layout_style %}
+            {% comment %}
+                See https://github.com/Kozea/WeasyPrint/blob/master/weasyprint/css/html5_ua.css
+                for base style sheet.
+            {% endcomment %}
             <style type="text/css">
                 @page {
                     size: {{ pagesize|default:"A4" }};
@@ -18,42 +17,37 @@
                     margin-top: 2.5cm;
                     margin-bottom: 2cm;
 
-                    @frame header {
-                        -pdf-frame-content: page-header;
-                        margin-top: 0.7cm;
-                        margin-right: 2mm;
-                        margin-bottom: 0cm;
-                        margin-left: 1.2cm;
+                    {% comment %}
+                    @bottom-right {
+                        content: "Page " counter(page) " of " counter(pages)
                     }
+                    {% endcomment %}
+                }
 
-                    @frame footer {
-                        -pdf-frame-content: page-footer;
-                        bottom: 0cm;
-                        margin-left: 1cm;
-                        margin-right: 1cm;
-                        height: 1cm;
-                    }
+                body {
+                    text-align: justify;
+                }
+
+                h1 {
+                    -weasy-bookmark-level: none;
                 }
             </style>
-        {%endblock%}
+        {% endblock %}
         {% block extra_style %}{% endblock %}
     {% endblock %}
 </head>
 <body>
-    <div>
-        {%block page_header%}
-        {%endblock%}
+<div>
+    {% block page_header %}
+    {% endblock %}
 
-        {%block content%}
-        {%endblock%}
-    </div>
+    {% block content %}
+    {% endblock %}
+</div>
 
-    <div id="page-footer">
-        {%block page_foot%}
-            {% comment %}
-                <pdf:pagenumber />
-            {% endcomment %}
-        {%endblock%}
-    </div>
+<div id="page-footer">
+    {% block page_foot %}
+    {% endblock %}
+</div>
 </body>
 </html>
