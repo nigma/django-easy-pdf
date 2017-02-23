@@ -33,5 +33,3 @@ docs/_build/
 runtime.txt
 .env
 .idea
-docs/
-*.rst
