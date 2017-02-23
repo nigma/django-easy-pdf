@@ -39,5 +39,5 @@ Other lower-level helpers
 -------------------------
 
 .. autofunction:: html_to_pdf(content, stylesheets=None, base_url=None, url_fetcher=default_url_fetcher, media_type='print')
-.. autofunction:: (content, download_filename=None, content_type='application/pdf', response_class=HttpResponse)
+.. autofunction:: make_response(content, download_filename=None, content_type='application/pdf', response_class=HttpResponse)
 .. autofunction:: encode_filename
