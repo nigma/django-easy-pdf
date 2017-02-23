@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
-from django.template import Context, RequestContext, loader
+from django.template import loader
 from django.utils.http import urlquote
 from django.utils.six import BytesIO
 from weasyprint import HTML, default_url_fetcher
@@ -105,13 +105,12 @@ def make_response(content, download_filename=None, content_type=CONTENT_TYPE, re
     return response
 
 
-def render_to_pdf(template, context, using=None, **render_kwargs):
+def render_to_pdf(template, context, using=None, request=None, **render_kwargs):
     """
     Creates PDF document from Django HTML template.
 
     :param str template: Path to Django template
-    :param context: Template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param dict context: Template context
     :param using: Optional Django template engine
 
     :rtype: :class:`bytes`
@@ -119,10 +118,7 @@ def render_to_pdf(template, context, using=None, **render_kwargs):
 
     Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
-    if not isinstance(context, Context):
-        context = Context(context)
-
-    content = loader.render_to_string(template, context, using=using)
+    content = loader.render_to_string(template, context, request=request, using=using)
     return html_to_pdf(content, **render_kwargs)
 
 
@@ -140,8 +136,7 @@ def render_to_pdf_response(request, template, context, using=None,
     :param request: Django HTTP request
     :type request: :class:`django.http.HttpRequest`
     :param str template: Path to Django template
-    :param context: Template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param dict context: Template context
     :param using: Optional Django template engine
     :param str download_filename: Optional filename to use for file download
     :param str content_type: Response content type
@@ -152,14 +147,7 @@ def render_to_pdf_response(request, template, context, using=None,
 
     Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
-
-    if not isinstance(context, Context):
-        if request is not None:
-            context = RequestContext(request, context)
-        else:
-            context = Context(context)
-
-    pdf = render_to_pdf(template, context, using=using, **render_kwargs)
+    pdf = render_to_pdf(template, context, using=using, request=request, **render_kwargs)
     return make_response(pdf, download_filename, content_type=content_type, response_class=response_class)
 
 
