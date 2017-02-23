@@ -32,20 +32,12 @@ PDF rendering functions
 .. automodule:: easy_pdf.rendering
 
 .. autofunction:: render_to_pdf
-.. autofunction:: render_to_pdf_response
+.. autofunction:: render_to_pdf_response(request, template, context, using=None, download_filename=None, content_type='application/pdf', response_class=HttpResponse, **render_kwargs)
+.. autofunction:: render_to_content_file
 
 Other lower-level helpers
 -------------------------
 
-.. autofunction:: html_to_pdf(content, dest, encoding="utf-8", link_callback=fetch_resources, **kwargs)
-.. autofunction:: fetch_resources
-.. autofunction:: make_response
+.. autofunction:: html_to_pdf(content, stylesheets=None, base_url=None, url_fetcher=default_url_fetcher, media_type='print')
+.. autofunction:: (content, download_filename=None, content_type='application/pdf', response_class=HttpResponse)
 .. autofunction:: encode_filename
-
-
-Exceptions
-==========
-
-.. automodule:: easy_pdf.exceptions
-   :members:
-   :show-inheritance:
