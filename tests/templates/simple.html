@@ -1,5 +1,14 @@
 {% extends "easy_pdf/base.html" %}
 
+{% block extra_style %}
+    <style type="text/css">
+        body {
+            font-family: "Helvetica", "sans-serif";
+            color: #333333;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <p>Hi there!</p>
 {% endblock %}

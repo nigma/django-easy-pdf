@@ -1,17 +1,18 @@
-django-easy-pdf
-===============
+Django PDF rendering
+====================
 
 Django PDF rendering, the easy way.
 
-.. image:: https://pypip.in/v/django-easy-pdf/badge.png
+.. image:: https://secure.travis-ci.org/nigma/django-easy-pdf.svg?branch=master
+    :target: https://secure.travis-ci.org/nigma/django-easy-pdf
+    :alt: Build Status
+.. image:: https://img.shields.io/pypi/v/django-easy-pdf.svg
     :target: https://pypi.python.org/pypi/django-easy-pdf/
     :alt: Latest Version
-
-.. image:: https://pypip.in/d/django-easy-pdf/badge.png
+.. image:: https://img.shields.io/badge/wheel-yes-green.svg
     :target: https://pypi.python.org/pypi/django-easy-pdf/
-    :alt: Downloads
-
-.. image:: https://pypip.in/license/django-easy-pdf/badge.png
+    :alt: Wheel
+.. image:: https://img.shields.io/pypi/l/django-easy-pdf.svg
     :target: https://pypi.python.org/pypi/django-easy-pdf/
     :alt: License
 
@@ -35,8 +36,8 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf``, ``xhtml2pdf>=0.0.6`` and ``reportlab>=2.7,<3``
-   in your ``requirements.txt`` file.
+1. Include ``django-easy-pdf>=0.2.0`` and ``WeasyPrint>=0.34`` in your ``requirements.txt`` file
+   and install necessary system packages.
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
 
@@ -57,26 +58,27 @@ Quickstart
         from easy_pdf.views import PDFTemplateView
 
         class HelloPDFView(PDFTemplateView):
-            template_name = "hello.html"
+            template_name = 'hello.html'
 
 
 Documentation
 -------------
 
-The full documentation is at `django-easy-pdf.rtfd.org <http://django-easy-pdf.rtfd.org>`_.
+The full documentation is at `django-easy-pdf.readthedocs.io <https://django-easy-pdf.readthedocs.io/en/develop/>`_.
 
 A live demo is at `easy-pdf.herokuapp.com <https://easy-pdf.herokuapp.com/>`_.
 You can run it locally after installing dependencies by running ``python demo.py``
-script from the cloned repository.
+script from the cloned repository or through Docker with ``make demo``.
+
 
 Dependencies
 ------------
 
 ``django-easy-pdf`` depends on:
 
-    - ``django>=1.5.1``
-    - ``xhtml2pdf>=0.0.6``
-    - ``reportlab>=2.7,<3``
+    - ``django>=1.10``
+    - ``WeasyPrint>=0.34``
+    - ``WeasyPrint`` dependencies (https://weasyprint.readthedocs.io/en/latest/install.html)
 
 
 License
@@ -89,7 +91,8 @@ Other Resources
 ---------------
 
 - GitHub repository - https://github.com/nigma/django-easy-pdf
-- PyPi Package site - http://pypi.python.org/pypi/django-easy-pdf
+- PyPi Package site - https://pypi.python.org/pypi/django-easy-pdf
+- Docs - https://django-easy-pdf.readthedocs.io/en/develop/
 
 
 Commercial Support

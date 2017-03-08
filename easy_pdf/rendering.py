@@ -1,86 +1,69 @@
-#-*- coding: utf-8 -*-
+# coding=utf-8
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import logging
-import os
-
-from django.conf import settings
-from django.template import loader, Context, RequestContext
+from django.core.files.base import ContentFile
 from django.http import HttpResponse
+from django.template import loader
 from django.utils.http import urlquote
 from django.utils.six import BytesIO
+from weasyprint import HTML, default_url_fetcher
 
-import xhtml2pdf.default
-from xhtml2pdf import pisa
+__all__ = [
+    'html_to_pdf', 'encode_filename', 'make_response',
+    'render_to_pdf', 'render_to_pdf_response', 'render_to_content_file'
+]
 
-from .exceptions import UnsupportedMediaPathException, PDFRenderingError
-
-logger = logging.getLogger("app.pdf")
-logger_x2p = logging.getLogger("app.pdf.xhtml2pdf")
+CONTENT_TYPE = 'application/pdf'
 
 
-def fetch_resources(uri, rel):
+def html_to_pdf(content, stylesheets=None, base_url=None, url_fetcher=default_url_fetcher, media_type='print'):
     """
-    Retrieves embeddable resource from given ``uri``.
+    Converts HTML ``content`` into PDF document.
 
-    For now only local resources (images, fonts) are supported.
+    The HTML document can contain references to image, font and style resources provided
+    as absolute or relative URLs. If resources are referenced by relative URLs the
+    ``base_url`` param must also be specified so the ``url_fetcher`` is able to load the files.
 
-    :param str uri: path or url to image or font resource
-    :returns: path to local resource file.
-    :rtype: str
-    :raises: :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
-    """
-    if settings.STATIC_URL and uri.startswith(settings.STATIC_URL):
-        path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ""))
-    elif settings.MEDIA_URL and uri.startswith(settings.MEDIA_URL):
-        path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
-    else:
-        path = os.path.join(settings.STATIC_ROOT, uri)
+    Resource URLs can use either external ``http://`` or ``https://`` protocol
+    or local ``file://`` protocol (for example when embedding images from ``STATIC_ROOT`` directory).
 
-    if not os.path.isfile(path):
-        raise UnsupportedMediaPathException(
-            "media urls must start with {} or {}".format(
-                settings.MEDIA_ROOT, settings.STATIC_ROOT
-            )
-        )
+    Keep that in mind and always specify and validate URLs for linked resources in case
+    of user generated content is rendered to PDF documents to avoid potential security issues.
 
-    return path.replace("\\", "/")
+    :param str content: HTML content to render
+    :type stylesheets: list of :class:`weasyprint.CSS` or :obj:`None`
+    :param stylesheets:
+            Additional :class:`weasyprint.CSS` stylesheets or :obj:`None`.
+            See https://weasyprint.readthedocs.io/en/latest/tutorial.html#stylesheet-origins.
+    :param base_url:
+            The base used to resolve relative URLs. See WeasyPrint docs.
+    :param url_fetcher:
+            A function or other callable with the same signature
+            as :func:`weasyprint.default_url_fetcher` called to fetch external resources
+            such as stylesheets and images.
+            See https://weasyprint.readthedocs.io/en/latest/tutorial.html#url-fetchers.
+    :param media_type:
+            The media type to use for ``@media``. Defaults to ``'print'``.
 
-
-def html_to_pdf(content, encoding="utf-8",
-                link_callback=fetch_resources, **kwargs):
-    """
-    Converts html ``content`` into PDF document.
-
-    :param unicode content: html content
-    :returns: PDF content
     :rtype: :class:`bytes`
-    :raises: :exc:`~easy_pdf.exceptions.PDFRenderingError`
+    :returns: PDF content
     """
-    src = BytesIO(content.encode(encoding))
+
+    html = HTML(string=content, base_url=base_url, url_fetcher=url_fetcher, media_type=media_type)
     dest = BytesIO()
-
-    pdf = pisa.pisaDocument(src, dest, encoding=encoding,
-                            link_callback=link_callback, **kwargs)
-    if pdf.err:
-        logger.error("Error rendering PDF document")
-        for entry in pdf.log:
-            if entry[0] == xhtml2pdf.default.PML_ERROR:
-                logger_x2p.error("line %s, msg: %s, fragment: %s", entry[1], entry[2], entry[3])
-        raise PDFRenderingError("Errors rendering PDF", content=content, log=pdf.log)
-
-    if pdf.warn:
-        for entry in pdf.log:
-            if entry[0] == xhtml2pdf.default.PML_WARNING:
-                logger_x2p.warning("line %s, msg: %s, fragment: %s", entry[1], entry[2], entry[3])
-
+    html.write_pdf(dest, stylesheets=stylesheets)
     return dest.getvalue()
 
 
 def encode_filename(filename):
     """
     Encodes filename part for ``Content-Disposition: attachment``.
+
+    :param str filename: Filename to encode
+
+    :rtype: str
+    :returns: Encoded filename for use in ``Content-Disposition`` header
 
     >>> print(encode_filename("abc.pdf"))
     filename=abc.pdf
@@ -99,72 +82,99 @@ def encode_filename(filename):
         return "filename*=UTF-8''%s" % quoted
 
 
-def make_response(content, filename=None, content_type="application/pdf"):
+def make_response(content, download_filename=None, content_type=CONTENT_TYPE, response_class=HttpResponse):
     """
-    Wraps content into HTTP response.
+    Wraps file content into HTTP response.
 
     If ``filename`` is specified then ``Content-Disposition: attachment``
     header is added to the response.
 
-    Default ``Content-Type`` is ``application/pdf``.
+    Default ``Content-Type`` is ``'application/pdf'``.
 
-    :param bytes content: response content
-    :param str filename: optional filename for file download
-    :param str content_type: response content type
+    :param bytes content: Response content
+    :param str download_filename: Optional filename for file download
+    :param str content_type: Response content type
+    :param response_class: Response class to instantiate
+
     :rtype: :class:`django.http.HttpResponse`
+    :returns: Django response
     """
-    response = HttpResponse(content, content_type=content_type)
-    if filename is not None:
-        response["Content-Disposition"] = "attachment; %s" % encode_filename(filename)
+    response = response_class(content, content_type=content_type)
+    if download_filename is not None:
+        response["Content-Disposition"] = "attachment; %s" % encode_filename(download_filename)
     return response
 
 
-def render_to_pdf(template, context, encoding="utf-8", **kwargs):
+def render_to_pdf(template, context, using=None, request=None, **render_kwargs):
     """
-    Create PDF document from Django html template.
+    Creates PDF document from Django HTML template.
 
-    :param str template: path to Django template
-    :param context: template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param str template: Path to Django template
+    :param dict context: Template context
+    :param using: Optional Django template engine
 
-    :returns: rendered PDF
     :rtype: :class:`bytes`
+    :returns: Rendered PDF document
 
-    :raises: :exc:`~easy_pdf.exceptions.PDFRenderingError`, :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
+    Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
-    if not isinstance(context, Context):
-        context = Context(context)
-
-    content = loader.render_to_string(template, context)
-    return html_to_pdf(content, encoding, **kwargs)
+    content = loader.render_to_string(template, context, request=request, using=using)
+    return html_to_pdf(content, **render_kwargs)
 
 
-def render_to_pdf_response(request, template, context, filename=None,
-                           encoding="utf-8", **kwargs):
+def render_to_pdf_response(request, template, context, using=None,
+                           download_filename=None, content_type=CONTENT_TYPE,
+                           response_class=HttpResponse,
+                           **render_kwargs):
     """
     Renders a PDF response using given ``request``, ``template`` and ``context``.
 
-    If ``filename`` param is specified then the response ``Content-Disposition``
+    If ``download_filename`` param is specified then the response ``Content-Disposition``
     header will be set to ``attachment`` making the browser display
     a "Save as.." dialog.
 
-    :param request: Django request
+    :param request: Django HTTP request
     :type request: :class:`django.http.HttpRequest`
-    :param str template: path to Django template
-    :param context: template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param str template: Path to Django template
+    :param dict context: Template context
+    :param using: Optional Django template engine
+    :param str download_filename: Optional filename to use for file download
+    :param str content_type: Response content type
+    :param response_class: Default is :class:`django.http.HttpResponse`
+
     :rtype: :class:`django.http.HttpResponse`
+    :returns: Django HTTP response
+
+    Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
+    pdf = render_to_pdf(template, context, using=using, request=request, **render_kwargs)
+    return make_response(pdf, download_filename, content_type=content_type, response_class=response_class)
 
-    if not isinstance(context, Context):
-        if request is not None:
-            context = RequestContext(request, context)
-        else:
-            context = Context(context)
 
-    try:
-        pdf = render_to_pdf(template, context, encoding=encoding, **kwargs)
-        return make_response(pdf, filename)
-    except PDFRenderingError as e:
-        logger.exception(e.message)
-        return HttpResponse(e.message)
+def render_to_content_file(template, context, using=None, **render_kwargs):
+    """
+    Example:
+
+        >>> content = render_to_content_file('doc.html')
+
+    Then save to Django storage:
+
+        >>> from django.core.files.storage import default_storage
+        >>> default_storage.save('file.pdf', content)
+
+    Or attach to a model instance:
+
+        >>> instance.attachment.save('file.pdf', content, save=True)
+
+    :param str template: Path to Django template
+    :param context: Template context
+    :type context: :class:`dict` or :class:`django.template.Context`
+    :param using: Optional Django template engine
+
+    :rtype: :class:`django.core.files.base.ContentFile`
+    :returns: Django content file
+
+    Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
+    """
+    content = render_to_pdf(template, context, using=using, **render_kwargs)
+    return ContentFile(content)

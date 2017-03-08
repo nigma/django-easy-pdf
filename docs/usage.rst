@@ -9,14 +9,11 @@ Create a Django HTML template with embedded CSS style. You can use special
 style attributes to format the PDF output.
 
 For more information on the supported HTML and CSS rules
-see docs at https://github.com/chrisglass/xhtml2pdf/blob/master/doc/usage.rst
+see docs at https://weasyprint.readthedocs.io/en/latest/features.html
 
 You can also use custom embeddable resources like images and fonts.
-Put them inside Django's ``STATIC_ROOT`` directory and make sure
-they are available locally on the server even if you
-are serving your static files from S3 or other CDN.
-
-For now only local resources are supported.
+They can be referenced locally via the ``file://`` protocol or fetched
+from web over ``http://`` or ``https://``.
 
 .. code-block:: css+django
 
@@ -24,9 +21,8 @@ For now only local resources are supported.
 
     {% block extra_style %}
         <style type="text/css">
-            @font-face { font-family: Lato; src: url(fonts/Lato-Reg.ttf); }
             body {
-                font-family: "Lato", "Helvetica", "sans-serif";
+                font-family: "Helvetica", "sans-serif";
                 color: #333333;
             }
         </style>
@@ -36,6 +32,7 @@ For now only local resources are supported.
         <div id="content">
             <div class="main">
                 <h1>Hi there!</h1>
+                <img src="file:///STATIC_ROOT/img/hello.png" />
             </div>
         </div>
     {% endblock %}
@@ -54,30 +51,36 @@ method to pass any extra variables to the template:
 
 .. code-block:: python
 
+    from django.conf import settings
     from easy_pdf.views import PDFTemplateView
 
     class HelloPDFView(PDFTemplateView):
-        template_name = "hello.html"
+        template_name = 'hello.html'
+
+        base_url = 'file://' + settings.STATIC_ROOT
+        download_filename = 'hello.pdf'
 
         def get_context_data(self, **kwargs):
             return super(HelloPDFView, self).get_context_data(
-                pagesize="A4",
-                title="Hi there!",
+                pagesize='A4',
+                title='Hi there!',
                 **kwargs
             )
 
+Notice the ``base_url`` attribute that can be used to specify base URL for
+all files referenced in the template by relative URLs.
 
 Then add the view to your url config and start serving PDF files
 rendered from the HTML template.
 
 .. code-block:: python
 
-    urlpatterns = patterns("",
-        url(r"^hello.pdf$", HelloPDFView.as_view())
-    )
+    urlpatterns = [
+        url(r'^hello.pdf$', HelloPDFView.as_view())
+    ]
 
 
-Rendering PDF outside Django views
-----------------------------------
+Rendering PDF outside of Django views
+-------------------------------------
 
 See :ref:`rendering_functions`.
