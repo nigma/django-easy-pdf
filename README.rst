@@ -64,7 +64,7 @@ Quickstart
 Documentation
 -------------
 
-The full documentation is at `django-easy-pdf.rtfd.org <https://django-easy-pdf.rtfd.org>`_.
+The full documentation is at `django-easy-pdf.readthedocs.io <https://django-easy-pdf.readthedocs.io/en/develop/>`_.
 
 A live demo is at `easy-pdf.herokuapp.com <https://easy-pdf.herokuapp.com/>`_.
 You can run it locally after installing dependencies by running ``python demo.py``
@@ -91,7 +91,8 @@ Other Resources
 ---------------
 
 - GitHub repository - https://github.com/nigma/django-easy-pdf
-- PyPi Package site - http://pypi.python.org/pypi/django-easy-pdf
+- PyPi Package site - https://pypi.python.org/pypi/django-easy-pdf
+- Docs - https://django-easy-pdf.readthedocs.io/en/develop/
 
 
 Commercial Support
