@@ -36,7 +36,10 @@ Quickstart
 ----------
 
 1. Include ``django-easy-pdf``, ``xhtml2pdf>=0.0.6`` and ``reportlab>=2.7,<3``
-   in your ``requirements.txt`` file.
+   in your ``requirements.txt`` file. If you are on Python 3 you need to install
+   the latest version of Reportlab and the beta version of xhtml2pdf::
+
+    $ pip install --pre xhtml2pdf
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
 
