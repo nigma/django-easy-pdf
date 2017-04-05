@@ -21,3 +21,11 @@ webencodings>=0.5
 # This is not a project requirement
 # Only used for demo at https://easy-pdf.herokuapp.com
 waitress>=1.0.0
+
+# This is not a project requirement
+# Only used for development
+flake8>=3.3.0
+mccabe>=0.6.1
+pycodestyle>=2.3.1
+pyflakes>=1.5.0
+mypy>=0.501
