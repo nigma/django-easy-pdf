@@ -33,14 +33,18 @@ COPY requirements.txt /app/
 COPY docs/requirements.txt /app/docs/
 
 RUN set -eux \
-    && pip3 install --no-cache-dir -U pip setuptools \
-    && pip3 install --no-cache-dir --timeout 1000 -r requirements.txt -r docs/requirements.txt
+    && pip3 install --no-cache-dir -U pip setuptools wheel
+
+RUN set -eux \
+    && pip3 install --no-cache-dir --timeout 1000 -r requirements.txt \
+    && pip3 install --no-cache-dir --timeout 1000 -r docs/requirements.txt
 
 #RUN mkdir -p ~/.fonts ~/.local/share/fonts
 #COPY tests/static/fonts/* ~/.fonts/
 
 COPY . /app/
 
-EXPOSE 8000
+RUN adduser --system django
+USER django
 
-CMD ["python", "demo.py"]
+CMD waitress-serve --port=$PORT demo:application

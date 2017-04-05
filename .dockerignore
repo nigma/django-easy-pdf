@@ -30,6 +30,11 @@ htmlcov/
 *.pot
 *.log
 docs/_build/
-runtime.txt
 .env
 .idea
+/docs
+.dockerignore
+.gitattributes
+.gitignore
+docker-compose.yml
+Dockerfile

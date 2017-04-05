@@ -30,7 +30,7 @@ def rel(*path):
 
 if not settings.configured:
     settings.configure(
-        DEBUG=True,
+        DEBUG=os.environ.get('DEBUG', True),
         TIMEZONE='UTC',
         INSTALLED_APPS=['easy_pdf'],
         TEMPLATES=[
@@ -50,6 +50,11 @@ if not settings.configured:
         STATIC_URL='/static/',
         ROOT_URLCONF=basename,
         WSGI_APPLICATION='{}.application'.format(basename),
+        ALLOWED_HOSTS=[
+            '127.0.0.1',
+            'localhost',
+            'easy-pdf.herokuapp.com'
+        ]
     )
 
 from easy_pdf.views import PDFTemplateView
