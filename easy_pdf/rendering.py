@@ -2,12 +2,18 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+try:
+    # noinspection PyUnresolvedReferences
+    from typing import Any, Callable, Dict, List, Optional, Text, Type
+except ImportError:
+    pass
+
 from django.core.files.base import ContentFile
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from django.utils.http import urlquote
 from django.utils.six import BytesIO
-from weasyprint import HTML, default_url_fetcher
+from weasyprint import CSS, HTML, default_url_fetcher
 
 __all__ = [
     'html_to_pdf', 'encode_filename', 'make_response',
@@ -18,6 +24,7 @@ CONTENT_TYPE = 'application/pdf'
 
 
 def html_to_pdf(content, stylesheets=None, base_url=None, url_fetcher=default_url_fetcher, media_type='print'):
+    # type: (Text, Optional[List[CSS]], Optional[Text], Callable, Text) -> bytes
     """
     Converts HTML ``content`` into PDF document.
 
@@ -56,7 +63,7 @@ def html_to_pdf(content, stylesheets=None, base_url=None, url_fetcher=default_ur
     return dest.getvalue()
 
 
-def encode_filename(filename):
+def encode_filename(filename):  # type: (Text) -> Text
     """
     Encodes filename part for ``Content-Disposition: attachment``.
 
@@ -83,6 +90,7 @@ def encode_filename(filename):
 
 
 def make_response(content, download_filename=None, content_type=CONTENT_TYPE, response_class=HttpResponse):
+    # type: (bytes, Optional[Text], Text, Type[HttpResponse]) -> HttpResponse
     """
     Wraps file content into HTTP response.
 
@@ -106,19 +114,21 @@ def make_response(content, download_filename=None, content_type=CONTENT_TYPE, re
 
 
 def render_to_pdf(template, context, using=None, request=None, **render_kwargs):
+    # type: (Text, Dict, Any, Any, Any) -> bytes
     """
     Creates PDF document from Django HTML template.
 
     :param str template: Path to Django template
     :param dict context: Template context
     :param using: Optional Django template engine
+    :param request: Optional Django Request
 
     :rtype: :class:`bytes`
     :returns: Rendered PDF document
 
     Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
-    content = loader.render_to_string(template, context, request=request, using=using)
+    content = loader.render_to_string(template, context, request=request, using=using)  # type: Text
     return html_to_pdf(content, **render_kwargs)
 
 
@@ -126,6 +136,7 @@ def render_to_pdf_response(request, template, context, using=None,
                            download_filename=None, content_type=CONTENT_TYPE,
                            response_class=HttpResponse,
                            **render_kwargs):
+    # type: (HttpRequest, Text, Dict, Any, Optional[Text], Text, Type[HttpResponse], Any) -> HttpResponse
     """
     Renders a PDF response using given ``request``, ``template`` and ``context``.
 
@@ -152,6 +163,7 @@ def render_to_pdf_response(request, template, context, using=None,
 
 
 def render_to_content_file(template, context, using=None, **render_kwargs):
+    # type: (Text, Dict, Any, Any) -> ContentFile
     """
     Example:
 

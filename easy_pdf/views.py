@@ -2,7 +2,13 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from django.http import HttpResponse
+try:
+    # noinspection PyUnresolvedReferences
+    from typing import Any, Dict, Optional, Text, Type
+except ImportError:
+    pass
+
+from django.http import HttpResponse, HttpRequest
 from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 
 from .rendering import render_to_pdf_response, CONTENT_TYPE
@@ -14,48 +20,47 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
     """
 
     #: Optional name of the PDF file for download. Leave blank for display in browser.
-    download_filename = None
+    download_filename = None  # type: Optional[Text]
 
     #: Base URL for referencing relative images, fonts and stylesheet resources.
-    base_url = None
+    base_url = None  # type: Optional[Text]
 
     #: Response class. Defaults to :class:`django.http.HttpResponse`.
-    response_class = HttpResponse
+    response_class = HttpResponse  # type: Type[HttpResponse]
 
     #: Response content type. Default is ``'application/pdf'``.
-    content_type = CONTENT_TYPE
+    content_type = CONTENT_TYPE  # type: Text
 
-    def get_download_filename(self):
+    def get_download_filename(self):  # type: () -> Optional[Text]
         """
         Returns :attr:`download_filename` value by default.
 
         If left blank the browser will display the PDF inline.
         Otherwise it will pop up the "Save as.." dialog.
 
-        :rtype: :class:`str` or :obj:`None`
+        :rtype: :class:`str` or None
         """
         return self.download_filename
 
-    def get_base_url(self):
+    def get_base_url(self):  # type: () -> Optional[Text]
         """
         Returns :attr:`base_url` value by default.
 
-        :rtype: :class:`str` or :obj:`None`
+        :rtype: :class:`str` or None
         """
         return self.base_url
 
-    def get_render_kwargs(self):
+    def get_render_kwargs(self):  # type: () -> Dict[Text, Any]
         """
         The render kwargs are passed to :func:`~easy_pdf.rendering.html_to_pdf`.
 
-        :rtype: dict
         """
         return {
             'download_filename': self.get_download_filename(),
             'base_url': self.get_base_url()
         }
 
-    def get_pdf_response(self, context):
+    def get_pdf_response(self, context):  # type: (Dict) -> HttpResponse
         """
         Renders PDF document and prepares response.
 
@@ -72,8 +77,8 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
             **self.get_render_kwargs()
         )
 
-    def render_to_response(self, context, **response_kwargs):
-        #response_kwargs.setdefault('content_type', self.content_type)
+    def render_to_response(self, context, **response_kwargs):  # type: (Dict, Any) -> HttpResponse
+        # response_kwargs.setdefault('content_type', self.content_type)
         return self.get_pdf_response(context)
 
 
@@ -88,7 +93,7 @@ class PDFTemplateView(PDFTemplateResponseMixin, ContextMixin, View):
             template_name = "hello.html"
     """
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):  # type: (HttpRequest, Any, Any) -> HttpResponse
         """
         Handles GET request and returns HTTP response.
         """
