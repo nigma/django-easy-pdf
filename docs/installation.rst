@@ -16,4 +16,5 @@ Installation
 
    For install instructions on other platforms see http://weasyprint.readthedocs.io/en/latest/install.html.
 
-   If you are using Docker to deploy your application you can consult the included `Dockerfile`.
+If you are using Docker to deploy your application you can consult the included `Dockerfile`
+for complete setup instructions.
