@@ -6,7 +6,7 @@ build:
 	docker build -t django-easy-pdf .
 
 demo: build
-	docker run --rm -p=8000:8000 -e PORT=8000 django-easy-pdf
+	docker run --rm -it -p=8000:8000 -e PORT=8000 django-easy-pdf
 
 shell: build
 	docker run --rm -it django-easy-pdf bash

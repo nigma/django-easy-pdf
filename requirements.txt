@@ -20,7 +20,7 @@ webencodings>=0.5
 
 # This is not a project requirement
 # Only used for demo at https://easy-pdf.herokuapp.com
-waitress>=1.0.0
+gunicorn
 
 # This is not a project requirement
 # Only used for development

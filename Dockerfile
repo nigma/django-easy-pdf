@@ -47,4 +47,4 @@ COPY . /app/
 RUN adduser --system django
 USER django
 
-CMD waitress-serve --port=$PORT demo:application
+CMD gunicorn --bind=0.0.0.0:$PORT --preload -w 3 demo:application
