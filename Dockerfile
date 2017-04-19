@@ -27,7 +27,7 @@ RUN set -eux \
     && pip3 install --no-cache-dir -U pip setuptools wheel
 
 RUN set -eux \
-    pip3 install --no-cache-dir --timeout 1000 -r requirements.txt -r requirements-dev.txt \
+    && pip3 install --no-cache-dir --timeout 1000 -r requirements.txt -r requirements-dev.txt \
     && pip3 install --no-cache-dir --timeout 1000 -r docs/requirements.txt
 
 COPY . /app/
