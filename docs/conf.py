@@ -284,8 +284,8 @@ texinfo_documents = [
 # branch, which is located at this URL.
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', 'https://docs.python.org/3/objects.inv'),
-    'sphinx': ('http://www.sphinx-doc.org/', None),
-    'django': ('https://docs.djangoproject.com/en/1.10/', 'https://docs.djangoproject.com/en/1.10/_objects/'),
+    'sphinx': ('http://www.sphinx-doc.org/', 'http://www.sphinx-doc.org/en/stable/objects.inv'),
+    'django': ('https://docs.djangoproject.com/en/1.11/', 'https://docs.djangoproject.com/en/1.11/_objects/'),
     'weasyprint': ('https://weasyprint.readthedocs.io/en/latest/', 'https://weasyprint.readthedocs.io/en/latest/objects.inv'),
 }
 

@@ -30,17 +30,20 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/
+COPY requirements-dev.txt /app/
 COPY docs/requirements.txt /app/docs/
 
 RUN set -eux \
     && pip3 install --no-cache-dir -U pip setuptools wheel
 
 RUN set -eux \
-    && pip3 install --no-cache-dir --timeout 1000 -r requirements.txt \
+    && pip3 install --no-cache-dir --timeout 1000 -r requirements.txt -r requirements-dev.txt \
     && pip3 install --no-cache-dir --timeout 1000 -r docs/requirements.txt
 
 #RUN mkdir -p ~/.fonts ~/.local/share/fonts
 #COPY tests/static/fonts/* ~/.fonts/
+
+EXPOSE 8000
 
 COPY . /app/
 

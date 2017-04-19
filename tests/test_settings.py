@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import logging
 import os
 import sys
@@ -22,7 +20,12 @@ sys.path.append(rel('..'))
 DEBUG = True
 SECRET_KEY = 'none'
 TIMEZONE = 'UTC'
-INSTALLED_APPS = ['easy_pdf', 'testapp']
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'easy_pdf',
+    'tests'
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -44,6 +47,4 @@ DATABASES = {
 }
 STATIC_ROOT = os.path.abspath(rel('static'))
 STATIC_URL = '/static/'
-ROOT_URLCONF = 'testapp.urls'
-
-TEST_RUNNER = 'tests.runner.NoDbTestRunner'
+ROOT_URLCONF = 'tests.urls'

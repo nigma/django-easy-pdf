@@ -79,6 +79,14 @@ rendered from the HTML template.
         url(r'^hello.pdf$', HelloPDFView.as_view())
     ]
 
+You can also use a mixin to output PDF from Django generic views::
+
+.. code-block:: python
+
+    class PDFUserDetailView(PDFTemplateResponseMixin, DetailView):
+        model = get_user_model()
+        template_name = 'user_detail.html'
+
 
 Rendering PDF outside of Django views
 -------------------------------------

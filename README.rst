@@ -3,9 +3,6 @@ Django PDF rendering
 
 Django PDF rendering, the easy way.
 
-.. image:: https://secure.travis-ci.org/nigma/django-easy-pdf.svg?branch=master
-    :target: https://secure.travis-ci.org/nigma/django-easy-pdf
-    :alt: Build Status
 .. image:: https://img.shields.io/pypi/v/django-easy-pdf.svg
     :target: https://pypi.python.org/pypi/django-easy-pdf/
     :alt: Latest Version
@@ -60,6 +57,13 @@ Quickstart
         class HelloPDFView(PDFTemplateView):
             template_name = 'hello.html'
 
+4. You can also use a mixin to output PDF from Django generic views:
+
+    .. code-block:: python
+
+        class PDFUserDetailView(PDFTemplateResponseMixin, DetailView):
+            model = get_user_model()
+            template_name = 'user_detail.html'
 
 Documentation
 -------------
