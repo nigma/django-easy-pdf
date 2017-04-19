@@ -9,7 +9,7 @@ Create a Django HTML template with embedded CSS style. You can use special
 style attributes to format the PDF output.
 
 For more information on the supported HTML and CSS rules
-see docs at https://github.com/chrisglass/xhtml2pdf/blob/master/doc/usage.rst
+see docs at https://github.com/xhtml2pdf/xhtml2pdf/blob/master/doc/source/usage.rst
 
 You can also use custom embeddable resources like images and fonts.
 Put them inside Django's ``STATIC_ROOT`` directory and make sure
@@ -24,9 +24,8 @@ For now only local resources are supported.
 
     {% block extra_style %}
         <style type="text/css">
-            @font-face { font-family: Lato; src: url(fonts/Lato-Reg.ttf); }
             body {
-                font-family: "Lato", "Helvetica", "sans-serif";
+                font-family: "Helvetica", "sans-serif";
                 color: #333333;
             }
         </style>
@@ -57,12 +56,12 @@ method to pass any extra variables to the template:
     from easy_pdf.views import PDFTemplateView
 
     class HelloPDFView(PDFTemplateView):
-        template_name = "hello.html"
+        template_name = 'hello.html'
 
         def get_context_data(self, **kwargs):
             return super(HelloPDFView, self).get_context_data(
-                pagesize="A4",
-                title="Hi there!",
+                pagesize='A4',
+                title='Hi there!',
                 **kwargs
             )
 
@@ -72,12 +71,12 @@ rendered from the HTML template.
 
 .. code-block:: python
 
-    urlpatterns = patterns("",
-        url(r"^hello.pdf$", HelloPDFView.as_view())
-    )
+    urlpatterns = [
+        url(r'^hello.pdf$', HelloPDFView.as_view())
+    ]
 
 
-Rendering PDF outside Django views
-----------------------------------
+Rendering PDF outside of Django views
+-------------------------------------
 
 See :ref:`rendering_functions`.

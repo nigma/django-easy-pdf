@@ -1,13 +1,9 @@
-django>=1.5.1
-xhtml2pdf>=0.0.6
+django>=1.10
+xhtml2pdf>=0.2b1
 
 # Dependencies of xhtml2pdf
-html5lib>=0.999
+html5lib>=1.0b10
 httplib2>=0.8
+pyPdf2>=1.26
 Pillow>=2.4.0
-pyPdf2>=1.21
-reportlab>=2.7,<3
-
-# This is not a project requirement
-# Only used for demo on http://easy-pdf.herokuapp.com
-waitress>=0.8.8
+reportlab>=3

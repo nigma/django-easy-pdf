@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# coding=utf-8
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
@@ -6,7 +6,7 @@ import logging
 import os
 
 from django.conf import settings
-from django.template import loader, Context, RequestContext
+from django.template import loader
 from django.http import HttpResponse
 from django.utils.http import urlquote
 from django.utils.six import BytesIO
@@ -119,27 +119,26 @@ def make_response(content, filename=None, content_type="application/pdf"):
     return response
 
 
-def render_to_pdf(template, context, encoding="utf-8", **kwargs):
+def render_to_pdf(template, context, using=None, request=None, encoding="utf-8", **kwargs):
     """
     Create PDF document from Django html template.
 
-    :param str template: path to Django template
-    :param context: template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param str template: Path to Django template
+    :param dict context: Template context
+    :param using: Optional Django template engine
+    :param request: Django HTTP request
+    :type request: :class:`django.http.HttpRequest`
 
     :returns: rendered PDF
     :rtype: :class:`bytes`
 
     :raises: :exc:`~easy_pdf.exceptions.PDFRenderingError`, :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
     """
-    if not isinstance(context, Context):
-        context = Context(context)
-
-    content = loader.render_to_string(template, context)
+    content = loader.render_to_string(template, context, request=request, using=using)
     return html_to_pdf(content, encoding, **kwargs)
 
 
-def render_to_pdf_response(request, template, context, filename=None,
+def render_to_pdf_response(request, template, context, using=None, filename=None,
                            encoding="utf-8", **kwargs):
     """
     Renders a PDF response using given ``request``, ``template`` and ``context``.
@@ -148,22 +147,15 @@ def render_to_pdf_response(request, template, context, filename=None,
     header will be set to ``attachment`` making the browser display
     a "Save as.." dialog.
 
-    :param request: Django request
+    :param request: Django HTTP request
     :type request: :class:`django.http.HttpRequest`
-    :param str template: path to Django template
-    :param context: template context
-    :type context: :class:`dict` or :class:`django.template.Context`
+    :param str template: Path to Django template
+    :param dict context: Template context
+    :param using: Optional Django template engine
     :rtype: :class:`django.http.HttpResponse`
     """
-
-    if not isinstance(context, Context):
-        if request is not None:
-            context = RequestContext(request, context)
-        else:
-            context = Context(context)
-
     try:
-        pdf = render_to_pdf(template, context, encoding=encoding, **kwargs)
+        pdf = render_to_pdf(template, context, using=using, encoding=encoding, **kwargs)
         return make_response(pdf, filename)
     except PDFRenderingError as e:
         logger.exception(e.message)

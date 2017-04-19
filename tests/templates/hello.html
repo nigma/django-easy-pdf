@@ -22,19 +22,15 @@
 
 {% block extra_style %}
     <style type="text/css">
-        @font-face { font-family: Lato; src: url(fonts/Lato-Bol.ttf); font-weight: bold; }
-        @font-face { font-family: Lato; src: url(fonts/Lato-Reg.ttf); }
-        @font-face { font-family: "Lato Light"; src: url(fonts/Lato-Lig.ttf); }
 
         html {
-            font-family: "Lato", "Helvetica", "sans-serif";
+            font-family: "Helvetica", "sans-serif";
             color: #333333;
         }
 
         p {
             margin: 0 0 6px 0;
             font-size: 11pt;
-            font-family: "Lato", "Helvetica", "sans-serif";
         }
 
         table {
@@ -58,7 +54,6 @@
 
             td {
                 font-size: 10pt;
-                font-family: "Lato", "Helvetica", "sans-serif";
                 vertical-align: top;
                 padding: 3px 0;
             }
@@ -180,9 +175,6 @@
             <p class="bottom-20">
                 Please cover the invoice within 10 days.
             </p>
-
-            <p>Dogecoin address (it's real): <strong>DREWeqR5KB2rbpJFybKvWepNs6sUQZowNs</strong></p>
-            <pdf:barcode value="DREWeqR5KB2rbpJFybKvWepNs6sUQZowNs" type="qr" barwidth="100" barheight="100" />
         </div>
     </div>
 {% endblock %}

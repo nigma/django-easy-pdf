@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# coding=utf-8
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
@@ -55,6 +55,7 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
             request=self.request,
             template=self.get_template_names(),
             context=context,
+            using=self.template_engine,
             filename=self.get_pdf_filename(),
             **self.get_pdf_kwargs()
         )

@@ -250,7 +250,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'django-easy-pdf', u'django-easy-pdf Documentation',
-     [u'Filip Wasilewski'], 1)
+     ['Filip Wasilewski'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -264,7 +264,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'django-easy-pdf', u'django-easy-pdf Documentation',
-   u'Filip Wasilewski', 'django-easy-pdf', 'One line description of project.',
+   'Filip Wasilewski', 'django-easy-pdf', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -283,9 +283,9 @@ texinfo_documents = [
 # Links to Python's docs should reference the most recent version of the 2.x
 # branch, which is located at this URL.
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/', None),
-    'sphinx': ('http://sphinx-doc.org/', None),
-    'django': ('http://docs.djangoproject.com/en/1.6/', 'http://docs.djangoproject.com/en/1.6/_objects/'),
+    'python': ('https://docs.python.org/3/', 'https://docs.python.org/3/objects.inv'),
+    'sphinx': ('http://www.sphinx-doc.org/', 'http://www.sphinx-doc.org/en/stable/objects.inv'),
+    'django': ('https://docs.djangoproject.com/en/1.11/', 'https://docs.djangoproject.com/en/1.11/_objects/'),
 }
 
 # Python's docs don't change every week.

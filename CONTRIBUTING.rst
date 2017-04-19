@@ -8,10 +8,10 @@ little bit helps, and credit will always be given.
 You can contribute in many ways:
 
 Types of Contributions
-----------------------
+======================
 
 Report Bugs
-~~~~~~~~~~~
+-----------
 
 Report bugs at https://github.com/nigma/django-easy-pdf/issues.
 
@@ -22,26 +22,26 @@ If you are reporting a bug, please include:
 * Detailed steps to reproduce the bug.
 
 Fix Bugs
-~~~~~~~~
+--------
 
 Look through the GitHub issues for bugs. Anything tagged with "bug"
 is open to whoever wants to implement it.
 
 Implement Features
-~~~~~~~~~~~~~~~~~~
+------------------
 
 Look through the GitHub issues for features. Anything tagged with "feature"
 is open to whoever wants to implement it.
 
 Write Documentation
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 django-easy-pdf could always use more documentation, whether as part of the 
 official django-easy-pdf docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
-~~~~~~~~~~~~~~~
+---------------
 
 The best way to send feedback is to file an issue at https://github.com/nigma/django-easy-pdf/issues.
 
@@ -53,7 +53,7 @@ If you are proposing a feature:
   are welcome :)
 
 Get Started!
-------------
+============
 
 Ready to contribute? Here's how to set up `django-easy-pdf` for local development.
 
@@ -89,14 +89,14 @@ To get flake8, just pip install them into your virtualenv.
 7. Submit a pull request through the GitHub website.
 
 Pull Request Guidelines
------------------------
+=======================
 
 Before you submit a pull request, check that it meets these guidelines:
 
 1. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-2. The pull request should work for Python 2.7, and 3.3 (if there are compatible
+2. The pull request should work for Python 2.7, and 3.4+ (if there are compatible
    3rd party packages available). Check
    https://travis-ci.org/nigma/django-easy-pdf/pull_requests
    and make sure that the tests pass for all supported Python versions.
