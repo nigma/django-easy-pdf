@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: django-easy-pdf
     ports:
       - "8000:8000"
     environment:
