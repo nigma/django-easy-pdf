@@ -35,7 +35,7 @@ mypy:
 	mypy --ignore-missing-imports --strict-optional easy_pdf tests  --verbose
 
 test:
-	python tests/manage.py test
+	python runtests.py
 
 test-all:
 	tox

@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 from django.contrib.auth import get_user_model
 from django.test.testcases import TestCase
 
@@ -18,9 +16,9 @@ class EasyPDFViewTestCase(TestCase):
         self.assertEqual(content[:4], b'%PDF')
 
 
-class PDFDetailViewTestCase(TestCase):
+class EasyPDFDetailViewTestCase(TestCase):
     def setUp(self):
-        super(PDFDetailViewTestCase, self).setUp()
+        super(EasyPDFDetailViewTestCase, self).setUp()
         model = get_user_model()
         self.obj = model.objects.create(username='joe', first_name='Joe', last_name='Cool')
 

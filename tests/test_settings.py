@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import logging
 import os
 import sys
@@ -26,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'easy_pdf',
-    'testapp'
+    'tests'
 ]
 TEMPLATES = [
     {
@@ -49,4 +47,4 @@ DATABASES = {
 }
 STATIC_ROOT = os.path.abspath(rel('static'))
 STATIC_URL = '/static/'
-ROOT_URLCONF = 'testapp.urls'
+ROOT_URLCONF = 'tests.urls'
