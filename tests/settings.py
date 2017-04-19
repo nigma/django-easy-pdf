@@ -22,7 +22,12 @@ sys.path.append(rel('..'))
 DEBUG = True
 SECRET_KEY = 'none'
 TIMEZONE = 'UTC'
-INSTALLED_APPS = ['easy_pdf', 'testapp']
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'easy_pdf',
+    'testapp'
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -45,5 +50,3 @@ DATABASES = {
 STATIC_ROOT = os.path.abspath(rel('static'))
 STATIC_URL = '/static/'
 ROOT_URLCONF = 'testapp.urls'
-
-TEST_RUNNER = 'tests.runner.NoDbTestRunner'

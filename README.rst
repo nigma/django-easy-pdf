@@ -66,6 +66,13 @@ Quickstart
         class HelloPDFView(PDFTemplateView):
             template_name = 'hello.html'
 
+4. You can also use a mixin to output PDF from Django generic views:
+
+    .. code-block:: python
+
+        class PDFUserDetailView(PDFTemplateResponseMixin, DetailView):
+            model = get_user_model()
+            template_name = 'user_detail.html'
 
 Documentation
 -------------
