@@ -1,4 +1,4 @@
-sphinx
-sphinx_rtd_theme>=0.1.5
-django>=1.11
+Sphinx>=1.5.5
+sphinx_rtd_theme>=0.2.4
+Django>=1.11
 WeasyPrint>=0.36
