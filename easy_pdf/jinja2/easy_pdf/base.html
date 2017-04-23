@@ -1,0 +1,60 @@
+{# jinja port of built-in django template #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title or "" }}</title>
+
+    {% block style_base %}
+        {#
+            See DEFAULT_CSS in https://github.com/chrisglass/xhtml2pdf/blob/master/xhtml2pdf/default.py
+            for base style.
+        #}
+
+        {% block layout_style %}
+            <style type="text/css">
+                @page {
+                    size: {{ pagesize or "A4" }};
+                    margin-left: 2.5cm;
+                    margin-right: 2.5cm;
+                    margin-top: 2.5cm;
+                    margin-bottom: 2cm;
+
+                    @frame header {
+                        -pdf-frame-content: page-header;
+                        margin-top: 0.7cm;
+                        margin-right: 2mm;
+                        margin-bottom: 0cm;
+                        margin-left: 1.2cm;
+                    }
+
+                    @frame footer {
+                        -pdf-frame-content: page-footer;
+                        bottom: 0cm;
+                        margin-left: 1cm;
+                        margin-right: 1cm;
+                        height: 1cm;
+                    }
+                }
+            </style>
+        {%endblock%}
+        {% block extra_style %}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+    <div>
+        {%block page_header%}
+        {%endblock%}
+
+        {%block content%}
+        {%endblock%}
+    </div>
+
+    <div id="page-footer">
+        {%block page_foot%}
+            {#
+                <pdf:pagenumber />
+            #}
+        {%endblock%}
+    </div>
+</body>
+</html>
