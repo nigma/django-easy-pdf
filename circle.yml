@@ -1,0 +1,33 @@
+machine:
+  services:
+    - docker
+
+general:
+  artifacts:
+    - "./dist"
+
+dependencies:
+  pre:
+    - docker --version
+
+  override:
+    - pip install tox tox-pyenv
+    - pyenv local 2.7.12 3.4.4 3.5.3 3.6.1
+    - make docker-build
+
+test:
+  override:
+    - make test-all
+    - make docker-test
+
+deployment:
+
+    master:
+        branch: master
+        commands:
+            - make docker-dist
+
+    develop:
+        branch: develop
+        commands:
+            - make docker-dist
