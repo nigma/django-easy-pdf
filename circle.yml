@@ -18,6 +18,7 @@ test:
   override:
     - make test-all
     - make ci-docker-test
+    - make ci-docker-docs
 
 deployment:
     master:
