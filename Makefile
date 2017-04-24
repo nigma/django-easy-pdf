@@ -72,5 +72,11 @@ docker-demo: docker-build
 docker-shell: docker-build
 	docker run --rm -it -v `pwd`/easy_pdf:/app/easy_pdf -v `pwd`/docs:/app/docs -v `pwd`/dist:/app/dist -v `pwd`/tests:/app/tests django-easy-pdf bash
 
+docker-upload:
+	docker run --rm -it -v ~/.pypirc:/root/.pypirc -v `pwd`/easy_pdf:/app/easy_pdf -v `pwd`/docs:/app/docs -v `pwd`/dist:/app/dist -v `pwd`/tests:/app/tests django-easy-pdf make upload
+
 docker-%: docker-build
 	docker run --rm -it -v `pwd`/easy_pdf:/app/easy_pdf -v `pwd`/docs:/app/docs -v `pwd`/dist:/app/dist -v `pwd`/tests:/app/tests django-easy-pdf make $*
+
+ci-docker-%: docker-build
+	docker run -it -v `pwd`/easy_pdf:/app/easy_pdf -v `pwd`/docs:/app/docs -v `pwd`/dist:/app/dist -v `pwd`/tests:/app/tests django-easy-pdf make $*
