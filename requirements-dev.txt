@@ -1,6 +1,8 @@
 pip>=9.0.1
 setuptools>=34.3.3
 wheel>=0.29.0
+django-nose
+coverage
 gunicorn
 flake8>=3.3.0
 mccabe>=0.6.1

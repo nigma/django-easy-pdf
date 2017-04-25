@@ -30,6 +30,8 @@ htmlcov/
 *.pot
 *.log
 docs/_build/
+.coverage
+nosetests.xml
 .env
 .idea
 /docs
@@ -38,3 +40,4 @@ docs/_build/
 .gitignore
 docker-compose.yml
 Dockerfile
+artifacts

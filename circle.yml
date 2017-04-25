@@ -1,10 +1,13 @@
 machine:
   services:
     - docker
+  environment:
+    - NOSE_WITH_XUNIT=1
 
 general:
   artifacts:
     - "./dist"
+    - "./artifacts"
 
 dependencies:
   pre:

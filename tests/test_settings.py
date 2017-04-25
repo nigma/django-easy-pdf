@@ -23,6 +23,7 @@ TIMEZONE = 'UTC'
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django_nose',
     'easy_pdf',
     'tests'
 ]
@@ -48,3 +49,5 @@ DATABASES = {
 STATIC_ROOT = os.path.abspath(rel('static'))
 STATIC_URL = '/static/'
 ROOT_URLCONF = 'tests.urls'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
