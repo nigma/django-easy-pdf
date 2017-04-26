@@ -10,6 +10,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.utils.http import urlquote
 from django.utils.six import BytesIO
+from django.contrib.staticfiles import finders
 
 import xhtml2pdf.default
 from xhtml2pdf import pisa
@@ -32,11 +33,11 @@ def fetch_resources(uri, rel):
     :raises: :exc:`~easy_pdf.exceptions.UnsupportedMediaPathException`
     """
     if settings.STATIC_URL and uri.startswith(settings.STATIC_URL):
-        path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ""))
+        path = finders.find(uri.replace(settings.STATIC_URL, ""))
     elif settings.MEDIA_URL and uri.startswith(settings.MEDIA_URL):
         path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
     else:
-        path = os.path.join(settings.STATIC_ROOT, uri)
+        path = finders.find(uri)
 
     if not os.path.isfile(path):
         raise UnsupportedMediaPathException(
