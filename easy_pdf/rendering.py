@@ -35,15 +35,10 @@ def fetch_resources(uri, rel):
         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ""))
     elif settings.MEDIA_URL and uri.startswith(settings.MEDIA_URL):
         path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
+    elif settings.MEDIA_URL:
+        path = settings.MEDIA_URL + '/' + uri
     else:
         path = os.path.join(settings.STATIC_ROOT, uri)
-
-    if not os.path.isfile(path):
-        raise UnsupportedMediaPathException(
-            "media urls must start with {} or {}".format(
-                settings.MEDIA_ROOT, settings.STATIC_ROOT
-            )
-        )
 
     return path.replace("\\", "/")
 
