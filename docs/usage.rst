@@ -75,7 +75,7 @@ rendered from the HTML template.
         url(r'^hello.pdf$', HelloPDFView.as_view())
     ]
 
-You can also use a mixin to output PDF from Django generic views::
+You can also use a mixin to output PDF from Django generic views:
 
 .. code-block:: python
 
