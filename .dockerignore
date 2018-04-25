@@ -34,7 +34,6 @@ docs/_build/
 nosetests.xml
 .env
 .idea
-/docs
 .dockerignore
 .gitattributes
 .gitignore
