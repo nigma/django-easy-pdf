@@ -2,7 +2,7 @@
 Installation
 ============
 
-1. Add ``django-easy-pdf==0.2.0`` and ``WeasyPrint>=0.34``
+1. Add ``django-easy-pdf==0.1.1`` and ``WeasyPrint>=0.34``
    to your ``requirements.txt`` file or install it directly from the command line by invoking::
 
         $ pip install -U django-easy-pdf WeasyPrint
