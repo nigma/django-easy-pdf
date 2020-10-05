@@ -28,7 +28,7 @@ setup(
     license="MIT",
     author="Filip Wasilewski",
     author_email="en@ig.ma",
-    url="https://github.com/nigma/django-easy-pdf",
+    url="https://github.com/pawanvirsingh/django-easy-pdf",
     long_description=readme + "\n\n" + history,
     packages=[
         "easy_pdf",
