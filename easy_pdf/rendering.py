@@ -9,8 +9,12 @@ from django.conf import settings
 from django.template import loader
 from django.http import HttpResponse
 from django.utils.http import urlquote
-from django.utils.six import BytesIO
 
+try:
+    from django.utils.six import BytesIO
+except ImportError:
+    from six import BytesIO
+    
 import xhtml2pdf.default
 from xhtml2pdf import pisa
 
