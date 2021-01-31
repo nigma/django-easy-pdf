@@ -11,7 +11,7 @@ except ImportError:
 
 import setuptools
 
-version = "0.1.2-beta.1"
+version = "0.1.2"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel upload")
@@ -24,7 +24,7 @@ readme = open("README.rst").read()
 history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 
 setuptools.setup(
-    name="django-easy-pdf3-oleksandrdevhub",
+    name="django-easy-pdf3",
     version=version,
     description="""Django PDF views, the easy way""",
     license="MIT",
@@ -46,7 +46,7 @@ setuptools.setup(
     zip_safe=False,
     keywords="django-easy-pdf3",
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",

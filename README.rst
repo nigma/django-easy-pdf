@@ -43,7 +43,7 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf``, ``xhtml2pdf`` in your ``requirements.txt`` file.
+1. Include ``django-easy-pdf3``, ``xhtml2pdf`` in your ``requirements.txt`` file.
    If you are on Python 3 you need to install the latest version of Reportlab and the beta version of xhtml2pdf::
 
     $ pip install xhtml2pdf>=0.2b1
@@ -90,9 +90,9 @@ script from the cloned repository or through Docker with ``make demo``.
 Dependencies
 ------------
 
-``django-easy-pdf`` depends on:
+``django-easy-pdf3`` depends on:
 
-    - ``django>=1.10``
+    - ``django>=2.0``
     - ``xhtml2pdf>=0.2b1``
     - ``reportlab``
 
@@ -100,14 +100,14 @@ Dependencies
 License
 -------
 
-``django-easy-pdf`` is released under the MIT license.
+``django-easy-pdf3`` is released under the MIT license.
 
 
 Other Resources
 ---------------
 
-- GitHub repository - https://github.com/nigma/django-easy-pdf
-- PyPi Package site - https://pypi.python.org/pypi/django-easy-pdf
+- GitHub repository - https://github.com/olksndrdevhub/django-easy-pdf3
+- PyPi Package site - https://pypi.python.org/pypi/django-easy-pdf3
 - Docs - https://django-easy-pdf.readthedocs.io/
 
 
