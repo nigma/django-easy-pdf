@@ -9,7 +9,9 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "0.1.2.dev1"
+import setuptools
+
+version = "0.1.2-beta.1"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel upload")
@@ -21,26 +23,28 @@ if sys.argv[-1] == "publish":
 readme = open("README.rst").read()
 history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 
-setup(
-    name="django-easy-pdf",
+setuptools.setup(
+    name="django-easy-pdf3-oleksandrdevhub",
     version=version,
     description="""Django PDF views, the easy way""",
     license="MIT",
     author="Filip Wasilewski",
     author_email="en@ig.ma",
-    url="https://github.com/nigma/django-easy-pdf",
+    maintainer='Romaniuk Oleksandr',
+    maintainer_email='oleksandr.romaniuk@protonmail.com',
+    url="https://github.com/olksndrdevhub/django-easy-pdf3",
     long_description=readme + "\n\n" + history,
     packages=[
         "easy_pdf",
     ],
     include_package_data=True,
     install_requires=[
-        "django>=1.8",
+        "django>=2.0",
         "xhtml2pdf>=0.2b1",
         "reportlab>=3"
     ],
     zip_safe=False,
-    keywords="django-easy-pdf",
+    keywords="django-easy-pdf3",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
@@ -55,6 +59,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
 )
