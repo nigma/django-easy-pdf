@@ -6,13 +6,13 @@ Django PDF rendering, the easy way.
 .. image:: https://circleci.com/gh/nigma/django-easy-pdf/tree/master.svg?style=svg
     :target: https://circleci.com/gh/nigma/django-easy-pdf/tree/master
     :alt: Build Status
-.. image:: https://img.shields.io/pypi/v/django-easy-pdf.svg
+.. image:: https://img.shields.io/pypi/v/django-easy-pdf3/
     :target: https://pypi.python.org/pypi/django-easy-pdf3/
     :alt: Latest Version
 .. image:: https://img.shields.io/badge/wheel-yes-green.svg
     :target: https://pypi.python.org/pypi/django-easy-pdf3/
     :alt: Wheel
-.. image:: https://img.shields.io/pypi/l/django-easy-pdf.svg
+.. image:: https://img.shields.io/pypi/l/django-easy-pdf3
     :target: https://pypi.python.org/pypi/django-easy-pdf3/
     :alt: License
 
