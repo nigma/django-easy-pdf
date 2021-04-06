@@ -12,8 +12,13 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from django.utils.http import urlquote
-from django.utils.six import BytesIO
 from weasyprint import CSS, HTML, default_url_fetcher
+# Django >= 3.0 doesn't have utils.six module anymore
+# so, we tweek it with python six package.
+try:
+    from django.utils.six import BytesIO
+except ImportError:
+    from six import BytesIO
 
 __all__ = [
     'html_to_pdf', 'encode_filename', 'make_response',
