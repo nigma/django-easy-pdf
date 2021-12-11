@@ -15,7 +15,7 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 from django.conf import settings
-from django.conf.urls import url
+from django.urls import re_path
 from django.core.wsgi import get_wsgi_application
 from django.utils.timezone import now as tznow
 
@@ -49,6 +49,7 @@ if not settings.configured:
         STATIC_ROOT=os.path.abspath(rel('tests', 'static')),
         STATIC_URL='/static/',
         ROOT_URLCONF=basename,
+        SECRET_KEY='foo',
         WSGI_APPLICATION='{}.application'.format(basename),
         ALLOWED_HOSTS=[
             '127.0.0.1',
@@ -73,7 +74,7 @@ class DemoPDFView(PDFTemplateView):
 
 
 urlpatterns = [
-    url(r'^$', DemoPDFView.as_view())
+    re_path(r'^$', DemoPDFView.as_view())
 ]
 
 application = get_wsgi_application()
