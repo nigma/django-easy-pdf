@@ -1,20 +1,15 @@
-# coding=utf-8
-
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import logging
 import os
-
-from django.conf import settings
-from django.template import loader
-from django.http import HttpResponse
-from django.utils.http import urlquote
-from django.utils.six import BytesIO
+from io import BytesIO
 
 import xhtml2pdf.default
+from django.conf import settings
+from django.http import HttpResponse
+from django.template import loader
+from django.utils.html import smart_urlquote
 from xhtml2pdf import pisa
 
-from .exceptions import UnsupportedMediaPathException, PDFRenderingError
+from .exceptions import PDFRenderingError, UnsupportedMediaPathException
 
 logger = logging.getLogger("app.pdf")
 logger_x2p = logging.getLogger("app.pdf.xhtml2pdf")
@@ -92,7 +87,7 @@ def encode_filename(filename):
     # TODO: http://greenbytes.de/tech/webdav/rfc6266.html
     # TODO: http://greenbytes.de/tech/tc2231/
 
-    quoted = urlquote(filename)
+    quoted = smart_urlquote(filename)
     if quoted == filename:
         return "filename=%s" % filename
     else:

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # django-easy-pdf documentation build configuration file, created by
 # sphinx-quickstart on Sun Jan 12 20:56:38 2014.
 #
