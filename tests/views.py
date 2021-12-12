@@ -1,5 +1,3 @@
-# coding=utf-8
-
 from django.contrib.auth import get_user_model
 from django.utils.timezone import now
 from django.views.generic import DetailView

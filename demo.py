@@ -1,13 +1,5 @@
 #!/bin/env python
-# coding=utf-8
-
-"""
-Demo script. Run:
-
-python.exe demo.py
-"""
-
-from __future__ import absolute_import, division, print_function, unicode_literals
+"""Demo script. Run: python.exe demo.py"""
 
 import logging
 import os

@@ -13,7 +13,7 @@ Types of Contributions
 Report Bugs
 -----------
 
-Report bugs at https://github.com/nigma/django-easy-pdf/issues.
+Report bugs at https://github.com/olksndrdevhub/django-easy-pdf3/issues.
 
 If you are reporting a bug, please include:
 

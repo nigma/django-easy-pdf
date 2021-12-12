@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -42,10 +41,24 @@ setuptools.setup(
     ],
     include_package_data=True,
     install_requires=[
-        "django>=2.0",
-        "xhtml2pdf>=0.2b1",
-        "reportlab>=3"
+        "django",
+        "xhtml2pdf",
+        "reportlab"
     ],
+    extras_require={
+        'test': (
+            'django-nose',
+            'coverage',
+            'flake8',
+            'isort',
+            'mccabe',
+            'pycodestyle',
+            'pyflakes',
+            'mypy',
+            'tox',
+            'twine',
+        )
+    },
     zip_safe=False,
     keywords="django-easy-pdf3",
     classifiers=[
@@ -56,14 +69,11 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Natural Language :: English",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
 )

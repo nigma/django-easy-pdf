@@ -1,8 +1,7 @@
-# coding=utf-8
-
 from django.urls import re_path
 
 from easy_pdf.views import PDFTemplateView
+
 from .views import DemoPDFView, PDFUserDetailView
 
 urlpatterns = [

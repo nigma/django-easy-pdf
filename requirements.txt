@@ -1,9 +1,0 @@
-django>=2.0
-xhtml2pdf>=0.2b1
-six>=1.15.0
-# Dependencies of xhtml2pdf
-html5lib>=1.0b10
-httplib2>=0.8
-pyPdf2>=1.26
-Pillow>=2.4.0
-reportlab>=3

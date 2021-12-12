@@ -1,10 +1,6 @@
-# coding=utf-8
-
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 import copy
 
-from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
+from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 
 from .rendering import render_to_pdf_response
 
