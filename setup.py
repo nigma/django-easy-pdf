@@ -33,6 +33,9 @@ setuptools.setup(
     maintainer='Romaniuk Oleksandr',
     maintainer_email='oleksandr.romaniuk@protonmail.com',
     url="https://github.com/olksndrdevhub/django-easy-pdf3",
+    project_urls={
+        "Bug Tracker": "https://github.com/olksndrdevhub/django-easy-pdf3/issues",
+    },
     long_description=readme + "\n\n" + history,
     packages=[
         "easy_pdf",

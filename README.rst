@@ -20,7 +20,7 @@ Developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
 Development Version
 -------------------
-Add support for Django 4 in 0.1.4 version
+Info: Add support for Django 4 in 0.1.4 version
 
 Note: This fork support Django>=2.0 with "xhtml2pdf" as rendering backend! Support with WeasyPrint is not tested!
 Note: A new PDF rendering backend using WeasyPrint for more accurate rendering is in development under the develop branch.
@@ -44,10 +44,12 @@ to render PDFs in the backend outside the request scope
 Quickstart
 ----------
 
-1. Include ``django-easy-pdf3``, ``xhtml2pdf`` in your ``requirements.txt`` file.
-   If you are on Python 3 you need to install the latest version of Reportlab and the beta version of xhtml2pdf::
 
-    $ pip install xhtml2pdf>=0.2b1
+1. Install django-easy-pdf3 package:
+   
+   $ pip install django-easy-pdf3
+
+   or add ``django-easy-pdf3`` to your requirements.txt 
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
 
@@ -110,6 +112,7 @@ Other Resources
 - GitHub repository - https://github.com/olksndrdevhub/django-easy-pdf3
 - PyPi Package site - https://pypi.python.org/pypi/django-easy-pdf3
 - Docs - https://django-easy-pdf.readthedocs.io/
+- Bug Tracker - https://github.com/olksndrdevhub/django-easy-pdf3/issues
 
 
 Commercial Support
