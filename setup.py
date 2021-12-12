@@ -11,7 +11,7 @@ except ImportError:
 
 import setuptools
 
-version = "0.1.2"
+version = "0.1.4"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel upload")
@@ -60,6 +60,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
 )

@@ -20,11 +20,12 @@ Developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
 Development Version
 -------------------
-Note: This fork support Django>=3.0 with "xhtml2pdf" as rendering backend! Support with WeasyPrint is not tested!
+Add support for Django 4 in 0.1.4 version
+
+Note: This fork support Django>=2.0 with "xhtml2pdf" as rendering backend! Support with WeasyPrint is not tested!
 Note: A new PDF rendering backend using WeasyPrint for more accurate rendering is in development under the develop branch.
 See https://github.com/nigma/django-easy-pdf/pull/34 for changes, testing and discussion.
 
-If you rely on the ``xhtml2pdf`` rendering backend and templates pin the package version to ``django-easy-pdf>=0.1.1<0.2.0``.
 
 Overview
 --------
